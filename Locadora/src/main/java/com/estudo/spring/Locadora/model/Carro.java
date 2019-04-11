@@ -1,7 +1,21 @@
 package com.estudo.spring.Locadora.model;
 
-public class Carro {
+import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Carro implements Serializable {
+
+	/**
+	 * Serial version id.
+	 */
+	private static final long serialVersionUID = 685916545858927193L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String modelo;
 	private String ano;

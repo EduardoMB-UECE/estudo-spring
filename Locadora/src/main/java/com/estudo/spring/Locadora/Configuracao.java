@@ -16,7 +16,7 @@ public class Configuracao {
 	public DataSource dataSource() {
 		DriverManagerDataSource ds = new DriverManagerDataSource();
 		ds.setDriverClassName("com.mysql.jdbc.Driver");
-		ds.setUrl("jdbc:mysql://localhost:3306/locadora");
+		ds.setUrl("jdbc:mysql://localhost:3306/locadora?useLegacyDatetimeCode=false&serverTimezone=UTC");
 		ds.setUsername("usuario");
 		ds.setPassword("senha123");
 		return ds;
@@ -28,7 +28,7 @@ public class Configuracao {
 		jpaVendorAdapter.setDatabase(Database.MYSQL);
 		jpaVendorAdapter.setShowSql(true);
 		jpaVendorAdapter.setGenerateDdl(true);
-		jpaVendorAdapter.setDatabasePlatform("org.hibernate.dialect.MySQLDialect");
+		jpaVendorAdapter.setDatabasePlatform("org.hibernate.dialect.MySQL8Dialect");
 		jpaVendorAdapter.setPrepareConnection(true);
 		return jpaVendorAdapter;
 	}
