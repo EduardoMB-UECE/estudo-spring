@@ -10,19 +10,25 @@
 	crossorigin="anonymous">
 </head>
 <body>
-	<div class="container">
-		<h3>
-			<a href="cadastroCarro">Cadastrar carros</a>
-		</h3>
-	</div>
-
 	<div class="container-fluid">
+		<div th:each="item : ${carro}" class="container-fluid">
+			<span th:text="${item.modelo}"></span> <br> <span
+				th:text="${item.ano}"></span> <br> <span
+				th:text="${item.preco}"></span>
+		</div>
+
+		<form method="post">
+			Rg: <input name="rg" /> <br> Nome: <input name="nome" /> <br>
+			<button type="submit">Salvar</button>
+			<a href="/"><button type="button">Voltar</button></a>
+		</form>
+		
+		<div class="container-fluid">
 		<table class="table">
 			<thead class="thead-dark">
 				<tr>
-					<th>Modelo</th>
-					<th>Ano</th>
-					<th>Preço</th>
+					<th>Rg</th>
+					<th>Nome</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -35,6 +41,8 @@
 				</tr>
 			</tbody>
 		</table>
+	</div>
+
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
