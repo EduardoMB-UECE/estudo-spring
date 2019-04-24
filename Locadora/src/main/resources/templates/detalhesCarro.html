@@ -11,37 +11,34 @@
 </head>
 <body>
 	<div class="container-fluid">
-		<div th:each="item : ${carro}" class="container-fluid">
-			<span th:text="${item.modelo}"></span> <br> <span
-				th:text="${item.ano}"></span> <br> <span
-				th:text="${item.preco}"></span>
-		</div>
-
+		<span th:text="${carro.modelo}"></span> <br> <span
+			th:text="${carro.ano}"></span> <br> <span
+			th:text="${carro.preco}"></span>
+		
+		<th:block th:include="mensagemvalidacao" />
+		
 		<form method="post">
 			Rg: <input name="rg" /> <br> Nome: <input name="nome" /> <br>
 			<button type="submit">Salvar</button>
 			<a href="/"><button type="button">Voltar</button></a>
 		</form>
-		
+
 		<div class="container-fluid">
-		<table class="table">
-			<thead class="thead-dark">
-				<tr>
-					<th>Rg</th>
-					<th>Nome</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="carro : ${carros}">
-					<td><a
-						th:href="${(#mvc.url('CC#detalhesCarro').arg(0, carro.id)).build()}"><span
-							th:text="${carro.modelo}"></span></a></td>
-					<td th:text="${carro.ano}"></td>
-					<td th:text="${carro.preco}"></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Rg</th>
+						<th>Nome</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="cliente : ${clientes}">
+						<td th:text="${cliente.nome}"></td>
+						<td th:text="${cliente.rg}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 
 	</div>
 

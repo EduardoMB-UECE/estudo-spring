@@ -1,0 +1,11 @@
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://ultraq.net.nz/thymeleaf/layout">
+<head></head>
+<body>
+	<div class="alert" role="alert" th:if="${mensagens ne null and mensagens.size() gt 0}">
+		<ul th:each="mensagem : ${mensagens}">
+			<li th:text="${mensagem}"></li>
+		</ul>
+	</div>
+</body>
+</html>
