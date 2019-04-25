@@ -8,5 +8,6 @@ import com.estudo.spring.Locadora.model.Cliente;
 public interface ClienteRepository extends CrudRepository<Cliente, String> {
 	
 	Iterable<Cliente> findByCarro(Carro carro);
+	Cliente findByRg(Integer rg);
 	
 }

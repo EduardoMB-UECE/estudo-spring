@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -22,6 +23,10 @@ import com.estudo.spring.Locadora.repository.ClienteRepository;
 
 @Controller
 public class CarroController {
+
+	private static final String MSG_INFO_CARRO_DELETADO_COM_SUCESSO = "Carro deletado com sucesso.";
+	private static final String MSG_ERRO_NAO_E_POSSIVEL_DELETAR_O_CARRO_POSSUI_CLIENTES_VINCULADOS = "Nao e possivel deletar o carro, pois ele já possui clientes vinculados.";
+	private static final String MSG_INFO_CLIENTE_DELETADO_COM_SUCESSO = "Cliente deletado com sucesso.";
 
 	@Autowired
 	private CarroRepository carroRepository;
@@ -76,6 +81,31 @@ public class CarroController {
 		}
 		attributes.addFlashAttribute("mensagens", mensagens);
 		return "redirect:/{codigo}";
+	}
+
+	@RequestMapping("/deletarCarro")
+	public String deletarCarro(Integer codigo, RedirectAttributes attributes) {
+		Carro carro = carroRepository.findById(codigo);
+		List<String> mensagens = new ArrayList<>();
+		try {
+			carroRepository.delete(carro);
+			mensagens.add(MSG_INFO_CARRO_DELETADO_COM_SUCESSO);
+		} catch (DataIntegrityViolationException e) {
+			mensagens.add(MSG_ERRO_NAO_E_POSSIVEL_DELETAR_O_CARRO_POSSUI_CLIENTES_VINCULADOS);
+		}
+		attributes.addFlashAttribute("mensagens", mensagens);
+		return "redirect:/";
+	}
+
+	@RequestMapping("/deletarCliente")
+	public String deletarCliente(Integer rg, RedirectAttributes attributes) {
+		Cliente cliente = clienteRepository.findByRg(rg);
+		List<String> mensagens = new ArrayList<>();
+		clienteRepository.delete(cliente);
+		
+		mensagens.add(MSG_INFO_CLIENTE_DELETADO_COM_SUCESSO);
+		attributes.addFlashAttribute("mensagens", mensagens);
+		return "redirect:/" + cliente.getCarro().getId();
 	}
 
 }

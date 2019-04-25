@@ -14,9 +14,9 @@
 		<span th:text="${carro.modelo}"></span> <br> <span
 			th:text="${carro.ano}"></span> <br> <span
 			th:text="${carro.preco}"></span>
-		
+
 		<th:block th:include="mensagemvalidacao" />
-		
+
 		<form method="post">
 			Rg: <input name="rg" /> <br> Nome: <input name="nome" /> <br>
 			<button type="submit">Salvar</button>
@@ -29,12 +29,18 @@
 					<tr>
 						<th>Rg</th>
 						<th>Nome</th>
+						<th>Deletar</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="cliente : ${clientes}">
 						<td th:text="${cliente.nome}"></td>
 						<td th:text="${cliente.rg}"></td>
+						<td><a
+							th:href="${(#mvc.url('CC#deletarCliente').arg(0, cliente.rg)).build()}">
+								<img style="width: 50px; height: 50px" alt="deletar"
+								src="http://pluspng.com/img-png/delete-button-png-delete-icon-1600.png">
+						</a></td>
 					</tr>
 				</tbody>
 			</table>

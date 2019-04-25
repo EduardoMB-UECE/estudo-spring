@@ -15,6 +15,8 @@
 			<a href="cadastroCarro">Cadastrar carros</a>
 		</h3>
 	</div>
+	
+	<th:block th:include="mensagemvalidacao" />
 
 	<div class="container-fluid">
 		<table class="table">
@@ -23,6 +25,7 @@
 					<th>Modelo</th>
 					<th>Ano</th>
 					<th>Preço</th>
+					<th>Deletar</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -32,6 +35,10 @@
 							th:text="${carro.modelo}"></span></a></td>
 					<td th:text="${carro.ano}"></td>
 					<td th:text="${carro.preco}"></td>
+					<td><a
+						th:href="${(#mvc.url('CC#deletarCarro').arg(0, carro.id)).build()}">
+						<img style="width: 50px; height: 50px" alt="deletar" src="http://pluspng.com/img-png/delete-button-png-delete-icon-1600.png">
+						</a></td>
 				</tr>
 			</tbody>
 		</table>
