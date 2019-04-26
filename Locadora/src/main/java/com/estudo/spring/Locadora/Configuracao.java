@@ -32,5 +32,4 @@ public class Configuracao {
 		jpaVendorAdapter.setPrepareConnection(true);
 		return jpaVendorAdapter;
 	}
-
 }

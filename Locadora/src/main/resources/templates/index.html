@@ -1,30 +1,14 @@
-<!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org"
-	xmlns:layout="http://ultraq.net.nz/thymeleaf/layout">
-<head>
-<meta charset="UTF-8">
-<title>Pagina inicial</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	crossorigin="anonymous">
-</head>
-<body>
-	<div class="container">
-		<h3>
-			<a href="cadastroCarro">Cadastrar carros</a>
-		</h3>
-	</div>
-	
-	<th:block th:include="mensagemvalidacao" />
+<th:block xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/principal">
 
-	<div class="container-fluid">
+	<div class="container-fluid" layout:fragment="conteudo">
 		<table class="table">
 			<thead class="thead-dark">
 				<tr>
 					<th>Modelo</th>
 					<th>Ano</th>
-					<th>PreÃ§o</th>
+					<th>Preço</th>
 					<th>Deletar</th>
 				</tr>
 			</thead>
@@ -37,23 +21,11 @@
 					<td th:text="${carro.preco}"></td>
 					<td><a
 						th:href="${(#mvc.url('CC#deletarCarro').arg(0, carro.id)).build()}">
-						<img style="width: 50px; height: 50px" alt="deletar" src="http://pluspng.com/img-png/delete-button-png-delete-icon-1600.png">
-						</a></td>
+							<img style="width: 50px; height: 50px" alt="deletar"
+							src="http://pluspng.com/img-png/delete-button-png-delete-icon-1600.png">
+					</a></td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-		crossorigin="anonymous"></script>
-</body>
-</html>
+</th:block>

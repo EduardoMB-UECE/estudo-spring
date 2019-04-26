@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org"
-	xmlns:layout="http://ultraq.net.nz/thymeleaf/layout">
-<head>
-<meta charset="UTF-8">
-<title>Cadastro de Carros</title>
-</head>
-<body>
-	<h1>Cadastro de Carros</h1>
-	<form method="post">
-		<input name="modelo" placeholder="Modelo" type="text" />
-		<input name="ano" placeholder="Ano" type="text" />
-		<input name="preco" placeholder="PreÃ§o" type="text" />
-		<button type="submit">Salvar</button>
-		<a href="/"><button type="button">Voltar</button></a>
-	</form>
-</body>
-</html>
+<th:block xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/principal">
+	<div layout:fragment="conteudo">
+		<form method="post">
+			<input name="modelo" placeholder="Modelo" type="text" /> <input
+				name="ano" placeholder="Ano" type="text" /> <input name="preco"
+				placeholder="Preço" type="text" />
+			<button type="submit">Salvar</button>
+			<a href="/"><button type="button">Voltar</button></a>
+		</form>
+	</div>
+</th:block>
