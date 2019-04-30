@@ -24,6 +24,8 @@ import com.estudo.spring.Locadora.repository.ClienteRepository;
 @Controller
 public class CarroController {
 
+	private static final String MSG_CARRO_ADICIONADO_COM_SUCESSO = "Carro adicionado com sucesso!";
+	private static final String MSG_CLIENTE_ADICIONADO_COM_SUCESSO = "Cliente adicionado com sucesso!";
 	private static final String MSG_INFO_CARRO_DELETADO_COM_SUCESSO = "Carro deletado com sucesso.";
 	private static final String MSG_ERRO_NAO_E_POSSIVEL_DELETAR_O_CARRO_POSSUI_CLIENTES_VINCULADOS = "Nao e possivel deletar o carro, pois ele já possui clientes vinculados.";
 	private static final String MSG_INFO_CLIENTE_DELETADO_COM_SUCESSO = "Cliente deletado com sucesso.";
@@ -40,9 +42,18 @@ public class CarroController {
 	}
 
 	@RequestMapping(value = "cadastroCarro", method = RequestMethod.POST)
-	public String cadastrar(Carro carro) {
-
-		carroRepository.save(carro);
+	public String cadastrar(@Valid Carro carro, BindingResult result, RedirectAttributes attributes) {
+		List<String> mensagens = new ArrayList<>();
+		if (result.hasErrors()) {
+			List<ObjectError> errors = result.getAllErrors();
+			for (ObjectError error : errors) {
+				mensagens.add(0, error.getDefaultMessage());
+			}
+		} else {
+			carroRepository.save(carro);
+			mensagens.add(MSG_CARRO_ADICIONADO_COM_SUCESSO);
+		}
+		attributes.addFlashAttribute("mensagens", mensagens);
 
 		return "redirect:cadastroCarro";
 	}
@@ -77,7 +88,7 @@ public class CarroController {
 			Carro carro = carroRepository.findById(codigo);
 			cliente.setCarro(carro);
 			clienteRepository.save(cliente);
-			mensagens.add("Cliente adicionado com sucesso!");
+			mensagens.add(MSG_CLIENTE_ADICIONADO_COM_SUCESSO);
 		}
 		attributes.addFlashAttribute("mensagens", mensagens);
 		return "redirect:/{codigo}";
@@ -102,7 +113,7 @@ public class CarroController {
 		Cliente cliente = clienteRepository.findByRg(rg);
 		List<String> mensagens = new ArrayList<>();
 		clienteRepository.delete(cliente);
-		
+
 		mensagens.add(MSG_INFO_CLIENTE_DELETADO_COM_SUCESSO);
 		attributes.addFlashAttribute("mensagens", mensagens);
 		return "redirect:/" + cliente.getCarro().getId();
